@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeOnLand - SDG 15 Conservation Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #8BC34A;
+            --accent-color: #FF9800;
+            --danger-color: #F44336;
+            --dark-color: #2E7D32;
+            --light-color: #E8F5E9;
+            --white-color: #FFFFFF;
+            --black-color: #212121;
+            --brown-color: #795548;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FAFAFA;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        .navbar {
+            background-color: var(--white-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--black-color);
+            font-weight: 500;
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .auth-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .auth-button:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .hero .btn {
+            padding: 12px 30px;
+            font-weight: 600;
+            margin-right: 15px;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-color);
+            border-color: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Counter Section */
+        .click-to-help {
+            background-color: var(--light-color);
+            padding: 60px 0;
+            margin-bottom: 50px;
+        }
+
+        .counter-card {
+            background: var(--white-color);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .counter-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .counter-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .counter-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--black-color);
+        }
+
+        .counter-desc {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .click-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .click-btn:hover {
+            background-color: var(--dark-color);
+            transform: scale(1.05);
+        }
+
+        .impact-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .impact-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .impact-list i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        /* Species Sections */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .species-carousel {
+            position: relative;
+            padding: 20px 0 60px;
+        }
+
+        .species-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 10px;
+            position: relative;
+            transition: all 0.3s;
+            height: 100%;
+            background-color: var(--white-color);
+        }
+
+        .species-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .species-img-container {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .species-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .species-card:hover .species-img {
+            transform: scale(1.1);
+        }
+
+        .endangered-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--danger-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .species-info {
+            padding: 20px;
+        }
+
+        .species-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .extinction-timeline {
+            margin: 15px 0;
+            height: 5px;
+            background-color: #eee;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .timeline-progress {
+            height: 100%;
+            border-radius: 5px;
+            background: linear-gradient(to right, var(--primary-color), var(--danger-color));
+            position: relative;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: -7px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: var(--white-color);
+            border: 3px solid var(--danger-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-dates {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .species-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .species-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .species-btn:hover {
+            background-color: var(--dark-color);
+            color: white;
+        }
+
+        /* Videos Section */
+        .videos-section {
+            background-color: var(--light-color);
+            padding: 60px 0;
+        }
+
+        .video-card {
+            background-color: var(--white-color);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .play-button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .play-button i {
+            color: var(--primary-color);
+            font-size: 24px;
+        }
+
+        .play-button:hover i {
+            color: white;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .video-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Species Identification Section */
+        .identification-section {
+            padding: 60px 0;
+        }
+
+        .upload-container {
+            background-color: var(--white-color);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--primary-color);
+            border-radius: 10px;
+            padding: 50px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: var(--light-color);
+        }
+
+        .upload-area:hover {
+            background-color: #DAF1DE;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .upload-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .upload-subtitle {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .or-divider {
+            position: relative;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .or-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 45%;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .or-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 45%;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .or-text {
+            background-color: white;
+            padding: 0 10px;
+            position: relative;
+            z-index: 1;
+            color: #888;
+        }
+
+        .url-input-group {
+            margin-bottom: 20px;
+        }
+
+        .identification-result {
+            display: none;
+            background-color: var(--white-color);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .result-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+
+        .result-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .result-scientific {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .result-status {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--danger-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .result-details {
+            margin-top: 20px;
+        }
+
+        .result-section {
+            margin-bottom: 20px;
+        }
+
+        .result-section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background-color: var(--light-color);
+            padding: 60px 0;
+        }
+
+        .quiz-container {
+            background-color: var(--white-color);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .quiz-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .quiz-subtitle {
+            color: #666;
+        }
+
+        .quiz-progress {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .step-bubble {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #888;
+        }
+
+        .step-bubble.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .step-bubble.completed {
+            background-color: var(--dark-color);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .quiz-question {
+            margin-bottom: 30px;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .answer-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .answer-option {
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .answer-option:hover {
+            border-color: var(--primary-color);
+            background-color: var(--light-color);
+        }
+
+        .answer-option.selected {
+            border-color: var(--primary-color);
+            background-color: var(--light-color);
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        /* AI Chat Section */
+        .ai-chat-section {
+            padding: 60px 0;
+        }
+
+        .chat-container {
+            background-color: var(--white-color);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .chat-avatar i {
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
+        .chat-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .chat-status {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 12px 15px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .user-message {
+            background-color: #E3F2FD;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bot-message {
+            background-color: #F5F5F5;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chat-input {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-top: 1px solid #eee;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .message-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .message-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        .send-button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .send-button:hover {
+            background-color: var(--dark-color);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background-color: #F5F5F5;
+            padding: 12px 15px;
+            border-radius: 15px;
+            border-bottom-left-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #888;
+            border-radius: 50%;
+            animation: typing-animation 1.5s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing-animation {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 60px 0;
+            background-color: var(--white-color);
+        }
+
+        .feature-card {
+            background-color: var(--white-color);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 100%;
+            transition: all 0.3s;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon i {
+            font-size: 30px;
+            color: var(--primary-color);
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--black-color);
+        }
+
+        .feature-desc {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo i {
+            margin-right: 10px;
+        }
+
+        .footer-desc {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            outline: none;
+        }
+
+        .newsletter-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom: none;
+        }
+
+        .modal-footer {
+            border-top: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .counter-card,
+            .chat-container,
+            .quiz-container {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .chat-container {
+                height: 450px;
+            }
+        }
+
+        /* Utilities */
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+
+        .mt-30 {
+            margin-top: 30px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-leaf"></i> LifeOnLand
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#species">Species</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#identify">Identify</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#quiz">Quiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#videos">Videos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    <!-- Complete the navbar section that was cut off -->
+                </li>
+            </ul>
+            <div class="d-flex">
+                <button class="auth-button me-2">Login</button>
+                <button class="auth-button">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-content">
+            <h1>Protect Our Planet's Biodiversity</h1>
+            <p>Join our mission to conserve endangered species and ecosystems. Every action counts in preserving life on land for future generations.</p>
+            <div class="d-flex flex-wrap">
+                <a href="#counter" class="btn btn-primary">Make an Impact</a>
+                <a href="#identify" class="btn btn-outline-light">Identify Species</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Counter Section - One Click One Help -->
+<section class="click-to-help" id="counter">
+    <div class="container">
+        <h2 class="section-title">One Click, One Help</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="counter-card">
+                    <div class="counter-value">12,842</div>
+                    <h3 class="counter-title">Trees Planted</h3>
+                    <p class="counter-desc">Help us combat deforestation by planting more trees with just a click.</p>
+                    <button class="click-btn" id="tree-btn">Plant a Tree</button>
+                    <ul class="impact-list mt-3">
+                        <li><i class="fas fa-check-circle"></i> Absorbs CO2</li>
+                        <li><i class="fas fa-check-circle"></i> Provides habitat</li>
+                        <li><i class="fas fa-check-circle"></i> Prevents soil erosion</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="counter-card">
+                    <div class="counter-value">8,576</div>
+                    <h3 class="counter-title">Animals Protected</h3>
+                    <p class="counter-desc">Support wildlife conservation efforts with a simple click.</p>
+                    <button class="click-btn" id="animal-btn">Protect Animals</button>
+                    <ul class="impact-list mt-3">
+                        <li><i class="fas fa-check-circle"></i> Funds anti-poaching</li>
+                        <li><i class="fas fa-check-circle"></i> Supports rehabilitation</li>
+                        <li><i class="fas fa-check-circle"></i> Preserves biodiversity</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="counter-card">
+                    <div class="counter-value">5,329</div>
+                    <h3 class="counter-title">Acres Conserved</h3>
+                    <p class="counter-desc">Help protect natural habitats from degradation and development.</p>
+                    <button class="click-btn" id="land-btn">Conserve Land</button>
+                    <ul class="impact-list mt-3">
+                        <li><i class="fas fa-check-circle"></i> Prevents desertification</li>
+                        <li><i class="fas fa-check-circle"></i> Protects ecosystems</li>
+                        <li><i class="fas fa-check-circle"></i> Preserves biodiversity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Endangered Species Section -->
+<section class="species-section" id="species">
+    <div class="container">
+        <h2 class="section-title">Endangered Species</h2>
+        <div class="row species-carousel">
+            <!-- Species Card 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="species-card">
+                    <div class="species-img-container">
+                        <img src="/api/placeholder/400/300" alt="Sumatran Tiger" class="species-img">
+                        <span class="endangered-badge">Critically Endangered</span>
+                    </div>
+                    <div class="species-info">
+                        <h3 class="species-name">Sumatran Tiger</h3>
+                        <p class="species-desc">Less than 400 individuals remain in the wild, threatened by habitat loss and poaching.</p>
+                        
+                        <div class="extinction-timeline">
+                            <div class="timeline-progress" style="width: 85%;">
+                                <span class="timeline-marker" style="left: 85%;"></span>
+                            </div>
+                            <div class="timeline-dates">
+                                <span>1970</span>
+                                <span>2025</span>
+                                <span>Extinction Risk</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="species-btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Species Card 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="species-card">
+                    <div class="species-img-container">
+                        <img src="/api/placeholder/400/300" alt="Mountain Gorilla" class="species-img">
+                        <span class="endangered-badge">Endangered</span>
+                    </div>
+                    <div class="species-info">
+                        <h3 class="species-name">Mountain Gorilla</h3>
+                        <p class="species-desc">Around 1,000 individuals remain, threatened by habitat destruction and civil unrest.</p>
+                        
+                        <div class="extinction-timeline">
+                            <div class="timeline-progress" style="width: 70%;">
+                                <span class="timeline-marker" style="left: 70%;"></span>
+                            </div>
+                            <div class="timeline-dates">
+                                <span>1970</span>
+                                <span>2025</span>
+                                <span>Extinction Risk</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="species-btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Species Card 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="species-card">
+                    <div class="species-img-container">
+                        <img src="/api/placeholder/400/300" alt="Rafflesia" class="species-img">
+                        <span class="endangered-badge">Vulnerable</span>
+                    </div>
+                    <div class="species-info">
+                        <h3 class="species-name">Rafflesia</h3>
+                        <p class="species-desc">The world's largest flower faces threats from deforestation and climate change.</p>
+                        
+                        <div class="extinction-timeline">
+                            <div class="timeline-progress" style="width: 60%;">
+                                <span class="timeline-marker" style="left: 60%;"></span>
+                            </div>
+                            <div class="timeline-dates">
+                                <span>1970</span>
+                                <span>2025</span>
+                                <span>Extinction Risk</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#" class="species-btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Species Identification Section -->
+<section class="identification-section" id="identify">
+    <div class="container">
+        <h2 class="section-title">Identify Species</h2>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="upload-container">
+                    <h3 class="mb-4">Upload an image to identify species</h3>
+                    <div class="upload-area" id="upload-area">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <h4 class="upload-title">Drag & Drop or Click to Upload</h4>
+                        <p class="upload-subtitle">Supported formats: JPG, PNG, GIF (Max 5MB)</p>
+                        <input type="file" id="file-upload" class="hidden" accept="image/*">
+                    </div>
+                    
+                    <div class="or-divider">
+                        <span class="or-text">OR</span>
+                    </div>
+                    
+                    <div class="url-input-group">
+                        <label for="image-url">Enter image URL:</label>
+                        <div class="input-group">
+                            <input type="text" id="image-url" class="form-control" placeholder="https://example.com/image.jpg">
+                            <button class="btn btn-primary">Identify</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="identification-result" id="identification-result">
+                    <div class="result-header">
+                        <img src="/api/placeholder/100/100" alt="Identified Species" class="result-img">
+                        <div>
+                            <h3 class="result-name">Malayan Tiger</h3>
+                            <p class="result-scientific">Panthera tigris jacksoni</p>
+                            <span class="result-status">Critically Endangered</span>
+                        </div>
+                    </div>
+                    
+                    <div class="result-details">
+                        <div class="result-section">
+                            <h4 class="result-section-title">Description</h4>
+                            <p>The Malayan tiger is a tiger subspecies that inhabits the southern and central parts of the Malay Peninsula. It is one of the smallest tiger subspecies, with males averaging 2.4 m in length.</p>
+                        </div>
+                        
+                        <div class="result-section">
+                            <h4 class="result-section-title">Conservation Status</h4>
+                            <p>Less than 200 individuals remain in the wild, making it critically endangered. Major threats include habitat loss, poaching, and human-wildlife conflict.</p>
+                        </div>
+                        
+                        <div class="result-section">
+                            <h4 class="result-section-title">Habitat</h4>
+                            <p>Tropical and subtropical moist broadleaf forests of the Malaysian Peninsula.</p>
+                        </div>
+                        
+                        <a href="#" class="species-btn mt-3">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quiz Section -->
+<section class="quiz-section" id="quiz">
+    <div class="container">
+        <h2 class="section-title">Test Your Knowledge</h2>
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h3 class="quiz-title">Biodiversity Quiz</h3>
+                <p class="quiz-subtitle">Complete the quiz to earn your Conservation Champion badge!</p>
+            </div>
+            
+            <div class="quiz-progress">
+                <div class="progress-step">
+                    <div class="step-bubble active">1</div>
+                    <span class="step-label">Basics</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-bubble">2</div>
+                    <span class="step-label">Species</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-bubble">3</div>
+                    <span class="step-label">Threats</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-bubble">4</div>
+                    <span class="step-label">Conservation</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-bubble">5</div>
+                    <span class="step-label">Actions</span>
+                </div>
+            </div>
+            
+            <div class="quiz-question">
+                <h4 class="question-text">What does the term "biodiversity" refer to?</h4>
+                <div class="answer-options">
+                    <div class="answer-option">
+                        <span>The variety of life in the world or in a particular habitat</span>
+                    </div>
+                    <div class="answer-option">
+                        <span>The study of biological diversity in urban environments</span>
+                    </div>
+                    <div class="answer-option">
+                        <span>A specific type of biological research method</span>
+                    </div>
+                    <div class="answer-option">
+                        <span>The classification system for different species</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-nav">
+                <button class="btn btn-outline-secondary" disabled>Previous</button>
+                <button class="btn btn-primary">Next</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Videos Section -->
+<section class="videos-section" id="videos">
+    <div class="container">
+        <h2 class="section-title">Watch & Learn</h2>
+        <div class="row">
+            <!-- Video Card 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="/api/placeholder/400/225" alt="Video Thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Inside the Fight to Save the Sumatran Rhinoceros</h3>
+                        <p class="video-desc">Join conservationists as they work to save the critically endangered Sumatran rhinoceros.</p>
+                        <div class="video-meta">
+                            <span><i class="fas fa-eye"></i> 24.5K views</span>
+                            <span><i class="fas fa-clock"></i> 12:45</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video Card 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="/api/placeholder/400/225" alt="Video Thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Rainforest Restoration: A Malaysian Success Story</h3>
+                        <p class="video-desc">Discover how communities in Malaysia are working to restore degraded rainforest habitats.</p>
+                        <div class="video-meta">
+                            <span><i class="fas fa-eye"></i> 18.2K views</span>
+                            <span><i class="fas fa-clock"></i> 10:18</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video Card 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="/api/placeholder/400/225" alt="Video Thumbnail">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">The Importance of Biodiversity for Human Health</h3>
+                        <p class="video-desc">Learn how biodiversity loss impacts human health and why conservation matters for everyone.</p>
+                        <div class="video-meta">
+                            <span><i class="fas fa-eye"></i> 31.8K views</span>
+                            <span><i class="fas fa-clock"></i> 15:32</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI Chat Section -->
+<section class="ai-chat-section" id="chat">
+    <div class="container">
+        <h2 class="section-title">Ask EcoGuide AI</h2>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="chat-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <div class="chat-title">EcoGuide AI</div>
+                            <div class="chat-status">Online | Conservation Expert</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message bot-message">
+                            Hello! I'm EcoGuide AI, your conservation assistant. How can I help you learn about biodiversity and conservation today?
+                            <div class="message-time">Just now</div>
+                        </div>
+                    </div>
+                    
+                    <div class="typing-indicator" id="typing-indicator">
+                        <div class="typing-dots">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input">
+                        <div class="input-group">
+                            <input type="text" class="message-input" placeholder="Ask about species, conservation, or how to help...">
+                            <button class="send-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section" id="about">
+    <div class="container">
+        <h2 class="section-title">About SDG 15: Life on Land</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3 class="feature-title">Sustainable Forests</h3>
+                    <p class="feature-desc">SDG 15 aims to protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and biodiversity loss.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3 class="feature-title">Wildlife Conservation</h3>
+                    <p class="feature-desc">Take urgent and significant action to reduce the degradation of natural habitats, halt the loss of biodiversity and, by 2025, protect and prevent the extinction of threatened species.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="feature-title">Community Action</h3>
+                    <p class="feature-desc">Mobilize and significantly increase financial resources from all sources to conserve and sustainably use biodiversity and ecosystems through community engagement and partnerships.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="footer-logo">
+                    <i class="fas fa-leaf"></i> LifeOnLand
+                </div>
+                <p class="footer-desc">Dedicated to protecting terrestrial ecosystems and biodiversity through education, awareness, and action.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#species">Species</a></li>
+                    <li><a href="#identify">Identify</a></li>
+                    <li><a href="#quiz">Quiz</a></li>
+                    <li><a href="#videos">Videos</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h3 class="footer-title">Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Forest Road, Kuala Lumpur</li>
+                    <li><i class="fas fa-phone"></i> +60 3 1234 5678</li>
+                    <li><i class="fas fa-envelope"></i> info@lifeonland.org</li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <h3 class="footer-title">Newsletter</h3>
+                <p class="footer-desc">Subscribe to get updates on conservation efforts and new initiatives.</p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Your email address">
+                    <button type="submit" class="newsletter-btn"><i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 LifeOnLand. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script>
+    // Counter increment functionality
+    document.getElementById('tree-btn').addEventListener('click', function() {
+        let counterElement = this.closest('.counter-card').querySelector('.counter-value');
+        let currentValue = parseInt(counterElement.textContent.replace(/,/g, ''));
+        counterElement.textContent = (currentValue + 1).toLocaleString();
+    });
+    
+    document.getElementById('animal-btn').addEventListener('click', function() {
+        let counterElement = this.closest('.counter-card').querySelector('.counter-value');
+        let currentValue = parseInt(counterElement.textContent.replace(/,/g, ''));
+        counterElement.textContent = (currentValue + 1).toLocaleString();
+    });
+    
+    document.getElementById('land-btn').addEventListener('click', function() {
+        let counterElement = this.closest('.counter-card').querySelector('.counter-value');
+        let currentValue = parseInt(counterElement.textContent.replace(/,/g, ''));
+        counterElement.textContent = (currentValue + 1).toLocaleString();
+    });
+    
+    // Upload area functionality
+    document.getElementById('upload-area').addEventListener('click', function() {
+        document.getElementById('file-upload').click();
+    });
+    
+    document.getElementById('upload-area').addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.classList.add('drag-over');
+    });
+    
+    document.getElementById('upload-area').addEventListener('dragleave', function() {
+        this.classList.remove('drag-over');
+    });
+    
+    document.getElementById('upload-area').addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.classList.remove('drag-over');
+        // Handle file upload logic here
+        // For demo purposes, show the result
+        document.getElementById('identification-result').style.display = 'block';
+    });
+    
+    document.getElementById('file-upload').addEventListener('change', function() {
+        // Handle file selection logic here
+        // For demo purposes, show the result
+        document.getElementById('identification-result').style.display = 'block';
+    });
+    
+    // Chat functionality
+    document.querySelector('.send-button').addEventListener('click', function() {
+        const inputElement = document.querySelector('.message-input');
+        const message = inputElement.value.trim();
+        
+        if (message) {
+            // Add user message
+            const chatMessages = document.getElementById('chat-messages');
+            const userMessageElement = document.createElement('div');
+            userMessageElement.classList.add('message', 'user-message');
+            userMessageElement.innerHTML = `
+                ${message}
+                <div class="message-time">Just now</div>
+            `;
+            chatMessages.appendChild(userMessageElement);
+            
+            // Clear input
+            inputElement.value = '';
+            
+            // Show typing indicator
+            document.getElementById('typing-indicator').style.display = 'block';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Simulate bot response after a delay
+            setTimeout(function() {
+                document.getElementById('typing-indicator').style.display = 'none';
+                
+                const botResponseElement = document.createElement('div');
+                botResponseElement.classList.add('message', 'bot-message');
+                
+                // Simple response logic - can be expanded
+                let botResponse = "I'm sorry, I don't have information about that yet. But I'm learning more about conservation every day!";
+                
+                if (message.toLowerCase().includes('tiger')) {
+                    botResponse = "Tigers are endangered with fewer than 3,900 remaining in the wild. They face threats from poaching and habitat loss. You can help by supporting anti-poaching efforts and habitat conservation.";
+                } else if (message.toLowerCase().includes('forest') || message.toLowerCase().includes('deforestation')) {
+                    botResponse = "Forests cover about 31% of our planet's land area but we're losing 10 million hectares annually. Sustainable forest management and reforestation projects are critical to combat this loss.";
+                } else if (message.toLowerCase().includes('help') || message.toLowerCase().includes('how can i')) {
+                    botResponse = "You can help protect biodiversity by: reducing your carbon footprint, supporting conservation organizations, avoiding products linked to deforestation, and spreading awareness about endangered species.";
+                }
+                
+                botResponseElement.innerHTML = `
+                    ${botResponse}
+                    <div class="message-time">Just now</div>
+                `;
+                
+                chatMessages.appendChild(botResponseElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1500);
+        }
+    });
+    
+    // Allow Enter key to send messages
+    document.querySelector('.message-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            document.querySelector('.send-button').click();
+        }
+    });
+    
+    // Quiz functionality
+    document.querySelectorAll('.answer-option').forEach(option => {
+        option.addEventListener('click', function() {
+            // Remove selection from all options
+            document.querySelectorAll('.answer-option').forEach(op => {
+                op.classList.remove('selected');
+            });
+            
+            // Select this option
+            this.classList.add('selected');
+        });
+    });
+</script>
+</body>
+</html>
